@@ -258,10 +258,16 @@ the advantage of using hardware security
 ([HSM: Hardware Security Module][HSM_DEFINITION]).
 
 
-[VAULT]:          https://www.vaultproject.io/ "Vault project."
-[VAULT_DOCKER]:   https://store.docker.com/images/vault "Vault official docker image."
-[VAULT_SOURCES]:  https://github.com/hashicorp/vault "Vault sources repository."
+A full example with a real application
+--------------------------------------
+
+
+
+
+[VAULT]:          https://www.vaultproject.io/                                   "Vault project."
+[VAULT_DOCKER]:   https://store.docker.com/images/vault                          "Vault official docker image."
+[VAULT_SOURCES]:  https://github.com/hashicorp/vault                             "Vault sources repository."
 [VAULT_START]:    https://www.vaultproject.io/intro/getting-started/install.html "Vault getting started documentation."
-[JQ]:             https://stedolan.github.io/jq/ "JQ official web site."
-[AMAZON_KMS]:     https://aws.amazon.com/kms/ "Amazon Key Management Service."
-[HSM_DEFINITION]: https://en.wikipedia.org/wiki/Hardware_security_module "Hardware Security Module definition on Wikipedia."
+[JQ]:             https://stedolan.github.io/jq/                                 "JQ official web site."
+[AMAZON_KMS]:     https://aws.amazon.com/kms/                                    "Amazon Key Management Service."
+[HSM_DEFINITION]: https://en.wikipedia.org/wiki/Hardware_security_module         "Hardware Security Module definition on Wikipedia."

@@ -53,6 +53,7 @@ def getNextTrainsFromServer( uic ):
                              auth=getTransilienCredentials() )
 
         if (resp.status_code / 100) == 2:
+            resp.encoding = 'utf-8'
             return resp.text
         else:
             print( "ERROR: Impossible to get next trains from Transilien (%d: %s)." %
