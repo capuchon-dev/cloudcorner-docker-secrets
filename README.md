@@ -261,7 +261,65 @@ the advantage of using hardware security
 A full example with a real application
 --------------------------------------
 
+In this version, the application containerization is not finished. So we will do
+this "by hand", not in containers, but all principles to demonstrate remains.
 
+* Ensure the Vault server is running (in dev mode for simplicity), as described
+  in preceding chapters.
+* Put in Vault a login/password for the SNCF Transilien API. You can request
+  these credentials by following
+  [the instruction here](https://ressources.data.sncf.com/explore/dataset/api-temps-reel-transilien/).
+  
+      > read -s myvar && echo $myvar | tr -d '\n' | ./vault write secret/transilien/login value=- && unset myvar
+      > read -s myvar && echo $myvar | tr -d '\n' | ./vault write secret/transilien/password value=- && unset myvar
+  
+  This put you credentials in:
+  * secret/transilien/login
+  * secret/transilien/password
+  
+  The application search them here. Like an API, these paths are a contract with
+  your application.
+* In a new shell session, create a Python 3 venv for the application, and
+  activate it (the virtual environment does not need to be in the sources dir,
+  you should put it anywhere but not in a repository dir to avoid to pollute the
+  git status):
+  
+      > python3 -m venv {A path of your choice}/SecretsInDockerVenv
+      > source {A path of your choice}/SecretsInDockerVenv/bin/activate
+  
+* In this version, the Vault configuration remains hard coded because of a lack
+  of time to finish this part. In real life, especially when the application is
+  containerized, these data should be given as environment variables at launch
+  time. In the mean time, you have to customize the sources by hand before
+  launching the app:
+  * Open the file `FullAppExample/Transilien/NextStops/transilien.py`.
+  * Customize these two variables with the information Vault gave to you when
+    you launched it:
+
+        VAULT_BASE_URL = 'http://127.0.0.1:8200'
+        VAULT_TOKEN    = '53d83fdd-91e9-3107-e66f-845987eddb7e'
+    
+* Go to the repository directory where the application is, initialize it, and
+  launch it:
+  
+      > cd FullAppExample/Transilien/
+      > python3 manage.py migrate
+      > python3 manage.py runserver
+  
+* In your web browser, open this URL:
+  
+      http://127.0.0.1:8000/nextStops/
+  
+You should see the next trains stops with some other details.
+
+The important things here are:
+* No credentials in the sources or the SCM repository.
+* No credentials in any container image.
+* The credentials are just in Vault. Be careful to put them here with tips given
+  in this lesson: shell history or clipboard are your enemy.
+* The web application dynamically get the credentials from Vault on each
+  request. So if they change, just change the data in Vault. No need to reset
+  the application.
 
 
 [VAULT]:          https://www.vaultproject.io/                                   "Vault project."
