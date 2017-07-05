@@ -1,0 +1,9 @@
+version: '3'
+services:
+  secret:
+    image: "alpine:3.6"
+    command: "sh"
+    volumes:
+      - ./secret.txt:/var/secret.txt
+    env_file:
+      - ./secrets.env
