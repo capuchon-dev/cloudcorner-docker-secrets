@@ -286,6 +286,7 @@ this "by hand", not in containers, but all principles to demonstrate remains.
   
       > python3 -m venv {A path of your choice}/SecretsInDockerVenv
       > source {A path of your choice}/SecretsInDockerVenv/bin/activate
+      > pip3 install requests django
   
 * In this version, the Vault configuration remains hard coded because of a lack
   of time to finish this part. In real life, especially when the application is
